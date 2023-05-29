@@ -1,4 +1,4 @@
-package com.fredrikbogg.tinder_app_flutter
+package com.celoreis.tinder
 
 import io.flutter.embedding.android.FlutterActivity
 
