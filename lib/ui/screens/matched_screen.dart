@@ -63,13 +63,13 @@ class MatchedScreen extends StatelessWidget {
               Column(
                 children: [
                   RoundedButton(
-                      text: 'SEND MESSAGE',
+                      text: 'ENVIAR MENSAGEM',
                       onPressed: () {
                         sendMessagePressed(context);
                       }),
                   SizedBox(height: 20),
                   RoundedOutlinedButton(
-                      text: 'KEEP SWIPING',
+                      text: 'CONTINUAR BUSCANDO',
                       onPressed: () {
                         keepSwipingPressed(context);
                       }),

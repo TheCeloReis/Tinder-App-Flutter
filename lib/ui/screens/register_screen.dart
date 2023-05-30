@@ -102,11 +102,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String getInvalidRegistrationMessage() {
     switch (_currentScreenIndex) {
       case 0:
-        return "Name is too short";
+        return "Nome inválido";
       case 1:
-        return "Invalid age";
+        return "Idade inválida";
       case 2:
-        return "Invalid photo";
+        return "Foto inválida";
       default:
         return "";
     }
@@ -118,7 +118,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         key: _scaffoldKey,
-        appBar: AppBar(title: Text('Register')),
+        appBar: AppBar(title: Text('Cadastrar')),
         body: CustomModalProgressHUD(
           inAsyncCall: _isLoading,
           child: Container(
@@ -165,12 +165,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   padding: kDefaultPadding,
                   child: _currentScreenIndex == (_endScreenIndex)
                       ? RoundedButton(
-                          text: 'REGISTER',
+                          text: 'CADASTRAR',
                           onPressed: _isLoading == false
                               ? () => {registerUser()}
                               : null)
                       : RoundedButton(
-                          text: 'CONTINUE',
+                          text: 'CONTINUAR',
                           onPressed: () => {
                             if (canContinueToNextSubScreen())
                               setState(() {

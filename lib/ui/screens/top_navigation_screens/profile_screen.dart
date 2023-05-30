@@ -52,7 +52,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             getBio(userSnapshot.data, userProvider),
                             Expanded(child: Container()),
                             RoundedButton(
-                                text: 'LOGOUT',
+                                text: 'SAIR',
                                 onPressed: () {
                                   logoutPressed(userProvider, context);
                                 })
@@ -71,14 +71,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Bio', style: Theme.of(context).textTheme.headline4),
+            Text('Sobre mim', style: Theme.of(context).textTheme.headline4),
             RoundedIconButton(
               onPressed: () {
                 showDialog(
                   context: context,
                   builder: (_) => InputDialog(
                     onSavePressed: (value) => userProvider.updateUserBio(value),
-                    labelText: 'Bio',
+                    labelText: 'Sobre mim',
                     startInputText: user.bio,
                   ),
                 );
@@ -91,7 +91,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         SizedBox(height: 5),
         Text(
-          user.bio.length > 0 ? user.bio : "No bio.",
+          user.bio.length > 0 ? user.bio : "Sem descrição.",
           style: Theme.of(context).textTheme.bodyText1,
         ),
       ],

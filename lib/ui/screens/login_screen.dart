@@ -54,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
         key: _scaffoldKey,
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: Text('Login'),
+          title: Text('Entrar'),
         ),
         body: CustomModalProgressHUD(
           inAsyncCall: _isLoading,
@@ -66,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Login to your account',
+                    'Entrar na sua conta',
                     style: Theme.of(context).textTheme.headline3,
                   ),
                   SizedBox(height: 40),
@@ -77,13 +77,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: 5),
                   BorderedTextField(
-                    labelText: 'Password',
+                    labelText: 'Senha',
                     obscureText: true,
                     keyboardType: TextInputType.text,
                     onChanged: (value) => _inputPassword = value,
                   ),
                   Expanded(child: Container()),
-                  RoundedButton(text: 'LOGIN', onPressed: () => loginPressed())
+                  RoundedButton(text: 'ENTRAR', onPressed: () => loginPressed())
                 ],
               ),
             ),

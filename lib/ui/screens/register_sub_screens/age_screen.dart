@@ -25,11 +25,7 @@ class _AgeScreenState extends State<AgeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'My',
-                style: Theme.of(context).textTheme.headline3,
-              ),
-              Text(
-                'age is',
+                'Minha idade é',
                 style: Theme.of(context).textTheme.headline3,
               ),
             ],
@@ -39,13 +35,13 @@ class _AgeScreenState extends State<AgeScreen> {
           child: Center(
             child: Container(
               child: NumberPicker(
-                itemWidth: double.infinity,
+                  itemWidth: double.infinity,
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.white, width: 2),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   value: age,
-                  minValue: 0,
+                  minValue: 18,
                   maxValue: 120,
                   onChanged: (value) => {
                         setState(() {

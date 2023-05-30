@@ -14,11 +14,11 @@ class EmailAndPasswordScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'My Email and',
+          'Meu email e',
           style: Theme.of(context).textTheme.headline3,
         ),
         Text(
-          'Password is',
+          'senha são',
           style: Theme.of(context).textTheme.headline3,
         ),
         SizedBox(height: 25),
@@ -29,7 +29,7 @@ class EmailAndPasswordScreen extends StatelessWidget {
         ),
         SizedBox(height: 5),
         BorderedTextField(
-          labelText: 'Password',
+          labelText: 'Senha',
           onChanged: passwordOnChanged,
           obscureText: true,
         ),
