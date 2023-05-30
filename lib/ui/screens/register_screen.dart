@@ -75,8 +75,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
         return AgeScreen(onChanged: (value) => {_userRegistration.age = value});
       case 2:
         return AddPhotoScreen(
-            onPhotoChanged: (value) =>
-                {_userRegistration.localProfilePhotoPath = value});
+            onPhotosChanged: (value) => {
+                  _userRegistration.localProfilePhotoPath = value[0],
+                  _userRegistration.localPhotosPath = value.sublist(1)
+                });
       case 3:
         return EmailAndPasswordScreen(
             emailOnChanged: (value) => {_userRegistration.email = value},
