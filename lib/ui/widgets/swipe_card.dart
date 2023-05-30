@@ -24,8 +24,21 @@ class _SwipeCardState extends State<SwipeCard> {
           width: MediaQuery.of(context).size.width * 0.85,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(25.0),
-            child:
-                Image.network(widget.person.profilePhotoPath, fit: BoxFit.fill),
+            child: PageView.builder(
+              itemCount: [
+                widget.person.profilePhotoPath,
+                ...widget.person.photosPath
+              ].length,
+              itemBuilder: (context, index) {
+                return Image.network(
+                  [
+                    widget.person.profilePhotoPath,
+                    ...widget.person.photosPath
+                  ][index],
+                  fit: BoxFit.fill,
+                );
+              },
+            ),
           ),
         ),
         Positioned(
@@ -36,10 +49,11 @@ class _SwipeCardState extends State<SwipeCard> {
             child: Column(
               children: [
                 Padding(
-                    padding: showInfo
-                        ? EdgeInsets.symmetric(horizontal: 8, vertical: 4)
-                        : EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-                    child: getUserContent(context)),
+                  padding: showInfo
+                      ? EdgeInsets.symmetric(horizontal: 8, vertical: 4)
+                      : EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                  child: getUserContent(context),
+                ),
                 showInfo ? getBottomInfo() : Container(),
               ],
             ),
@@ -57,16 +71,20 @@ class _SwipeCardState extends State<SwipeCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             RichText(
-                text: TextSpan(
-              style: DefaultTextStyle.of(context).style,
-              children: <TextSpan>[
-                TextSpan(
-                  text: widget.person.name,
-                  style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
-                ),
-                TextSpan(text: '  ${widget.person.age}', style: TextStyle(fontSize: 20)),
-              ],
-            )),
+              text: TextSpan(
+                style: DefaultTextStyle.of(context).style,
+                children: <TextSpan>[
+                  TextSpan(
+                    text: widget.person.name,
+                    style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+                  ),
+                  TextSpan(
+                    text: '  ${widget.person.age}',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
         RoundedIconButton(
@@ -110,7 +128,7 @@ class _SwipeCardState extends State<SwipeCard> {
                   child: Text(
                     widget.person.bio.length > 0
                         ? widget.person.bio
-                        : "No bio.",
+                        : "Sem descrição",
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
                 ),

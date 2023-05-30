@@ -158,37 +158,6 @@ class _MatchScreenState extends State<MatchScreen> {
                                           ),
                                         ),
                                       ),
-
-                                      /*    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        RoundedIconButton(
-                                          onPressed: () {
-                                            personSwiped(
-                                                userSnapshot.data,
-                                                snapshot.data,
-                                                false);
-                                          },
-                                          iconData: Icons.clear,
-                                          buttonColor:
-                                              kColorPrimaryVariant,
-                                          iconSize: 30,
-                                        ),
-                                        RoundedIconButton(
-                                          onPressed: () {
-                                            personSwiped(
-                                                userSnapshot.data,
-                                                snapshot.data,
-                                                true);
-                                          },
-                                          iconData: Icons.favorite,
-                                          iconSize: 30,
-                                        ),
-                                      ],
-                                      ),*/
                                     ],
                                   ),
                                 ),
