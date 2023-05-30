@@ -13,7 +13,7 @@ class AgeScreen extends StatefulWidget {
 }
 
 class _AgeScreenState extends State<AgeScreen> {
-  int age = 0;
+  int age = 18;
 
   @override
   Widget build(BuildContext context) {

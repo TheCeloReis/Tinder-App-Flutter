@@ -28,6 +28,13 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
     }
   }
 
+  void clearImage() {
+    setState(() {
+      _imagePath = null;
+      widget.onPhotoChanged(null);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -53,18 +60,36 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
                                 imageType: ImageType.FILE_IMAGE,
                               ),
                       ),
-                      Positioned.fill(
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: _imagePath == null
-                              ? RoundedIconButton(
-                                  onPressed: pickImageFromGallery,
-                                  iconData: Icons.add,
-                                  iconSize: 20,
-                                )
-                              : null,
+                      if (_imagePath != null)
+                        Positioned(
+                          top: 10,
+                          right: 10,
+                          child: Container(
+                            width: 32,
+                            height: 32,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                            ),
+                            child: IconButton(
+                              onPressed: clearImage,
+                              icon: Icon(Icons.clear),
+                              color: Colors.black,
+                              iconSize: 16,
+                            ),
+                          ),
                         ),
-                      ),
+                      if (_imagePath == null)
+                        Positioned.fill(
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: RoundedIconButton(
+                              onPressed: pickImageFromGallery,
+                              iconData: Icons.add,
+                              iconSize: 24,
+                            ),
+                          ),
+                        ),
                     ],
                   ),
                 ),
