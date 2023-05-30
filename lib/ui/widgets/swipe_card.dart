@@ -14,6 +14,27 @@ class SwipeCard extends StatefulWidget {
 
 class _SwipeCardState extends State<SwipeCard> {
   bool showInfo = false;
+  PageController _pageController;
+  int _currentPageIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(initialPage: 0);
+    _pageController.addListener(_onPageChanged);
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void _onPageChanged() {
+    setState(() {
+      _currentPageIndex = _pageController.page.toInt();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,18 +46,48 @@ class _SwipeCardState extends State<SwipeCard> {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(25.0),
             child: PageView.builder(
-              itemCount: [
-                widget.person.profilePhotoPath,
-                ...widget.person.photosPath
-              ].length,
+              controller: _pageController,
+              itemCount: 1 + widget.person.photosPath.length,
               itemBuilder: (context, index) {
-                return Image.network(
-                  [
-                    widget.person.profilePhotoPath,
-                    ...widget.person.photosPath
-                  ][index],
-                  fit: BoxFit.fill,
-                );
+                if (index == 0) {
+                  return Container(
+                    color: Colors.grey.shade800, // Grey background color
+                    child: Image.network(
+                      widget.person.profilePhotoPath,
+                      fit: BoxFit.fill,
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) {
+                          return child;
+                        }
+                        return Center(
+                          child: CircularProgressIndicator(
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(kAccentColor),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                } else {
+                  return Container(
+                    color: Colors.grey.shade800, // Grey background color
+                    child: Image.network(
+                      widget.person.photosPath[index - 1],
+                      fit: BoxFit.fill,
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) {
+                          return child;
+                        }
+                        return Center(
+                          child: CircularProgressIndicator(
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(kAccentColor),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                }
               },
             ),
           ),

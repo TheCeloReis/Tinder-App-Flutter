@@ -95,8 +95,8 @@ class ChatListTile extends StatelessWidget {
             opacity: 0.6,
             child: Text(
               chatWithUser.chat.lastMessage == null
-                  ? "Write something!"
-                  : ((isLastMessageMyText() ? "You: " : "") +
+                  ? "Mande uma mensagem"
+                  : ((isLastMessageMyText() ? "Eu: " : "") +
                       chatWithUser.chat.lastMessage.text),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

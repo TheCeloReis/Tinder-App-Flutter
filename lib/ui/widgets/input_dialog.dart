@@ -43,7 +43,7 @@ class _InputDialogState extends State<InputDialog> {
         FlatButton(
           color: kColorPrimaryVariant,
           child: Text(
-            'CANCEL',
+            'CANCELAR',
             style: Theme.of(context).textTheme.bodyText1,
           ),
           onPressed: () {
@@ -53,7 +53,7 @@ class _InputDialogState extends State<InputDialog> {
         FlatButton(
           color: kAccentColor,
           child: Text(
-            'SAVE',
+            'SALVAR',
             style: Theme.of(context).textTheme.bodyText1,
           ),
           onPressed: () {

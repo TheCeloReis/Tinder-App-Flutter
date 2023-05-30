@@ -51,6 +51,10 @@ class MatchedScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Image.asset('images/homescreen_logo.png', width: 40),
+              Text(
+                'Seu crush!',
+                style: Theme.of(context).textTheme.headline4,
+              ),
               Container(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
