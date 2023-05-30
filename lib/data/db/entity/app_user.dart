@@ -6,19 +6,22 @@ class AppUser {
   String name;
   int age;
   String profilePhotoPath;
+  List<String> photosPath = [];
   String bio = "";
 
   AppUser(
       {@required this.id,
       @required this.name,
       @required this.age,
-      @required this.profilePhotoPath});
+      @required this.profilePhotoPath,
+      @required this.photosPath});
 
   AppUser.fromSnapshot(DocumentSnapshot snapshot) {
     id = snapshot['id'];
     name = snapshot['name'];
     age = snapshot['age'];
     profilePhotoPath = snapshot['profile_photo_path'];
+    photosPath = snapshot['photos_path'].cast<String>();
     bio = snapshot.get('bio') ?? '';
   }
 
@@ -28,6 +31,7 @@ class AppUser {
       'name': name,
       'age': age,
       'profile_photo_path': profilePhotoPath,
+      'photos_path': photosPath,
       'bio': bio
     };
   }

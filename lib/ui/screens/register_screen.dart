@@ -83,10 +83,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
             _userRegistration.localProfilePhotoPath = value[0],
             _userRegistration.localPhotosPath = value.sublist(1)
           },
-          initialImagePaths: [
-            _userRegistration.localProfilePhotoPath,
-            ..._userRegistration.localPhotosPath
-          ],
+          initialImagePaths: _userRegistration.localProfilePhotoPath == null
+              ? []
+              : [
+                  _userRegistration.localProfilePhotoPath,
+                  ..._userRegistration.localPhotosPath
+                ],
         );
       case 3:
         return EmailAndPasswordScreen(

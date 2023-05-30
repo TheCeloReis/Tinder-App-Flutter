@@ -14,12 +14,12 @@ class AgeScreen extends StatefulWidget {
 }
 
 class _AgeScreenState extends State<AgeScreen> {
-  int age = 18;
+  int age;
 
   @override
   void initState() {
     super.initState();
-    age = widget.initialValue.toInt();
+    age = widget.initialValue != null ? widget.initialValue : 18;
   }
 
   @override

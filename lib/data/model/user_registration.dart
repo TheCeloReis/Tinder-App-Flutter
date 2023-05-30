@@ -1,8 +1,8 @@
 class UserRegistration {
   String name = '';
-  int age = 0;
+  int age;
   String email = '';
   String password = '';
-  String localProfilePhotoPath = '';
+  String localProfilePhotoPath;
   List<String> localPhotosPath = [];
 }

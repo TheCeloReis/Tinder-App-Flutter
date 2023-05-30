@@ -36,28 +36,41 @@ class UserProvider extends ChangeNotifier {
 
   Future<Response> registerUser(UserRegistration userRegistration,
       GlobalKey<ScaffoldState> errorScaffoldKey) async {
-    Response<dynamic> response = await _authSource.register(
+    Response<dynamic> authResponse = await _authSource.register(
         userRegistration.email, userRegistration.password);
-    if (response is Success<UserCredential>) {
-      String id = (response as Success<UserCredential>).value.user.uid;
-      response = await _storageSource.uploadUserProfilePhoto(
-          userRegistration.localProfilePhotoPath, id);
+    if (authResponse is Success<UserCredential>) {
+      String userId = authResponse.value.user.uid;
 
-      if (response is Success<String>) {
-        String profilePhotoUrl = response.value;
+      Response<dynamic> profilePhotoResponse =
+          await _storageSource.uploadUserProfilePhoto(
+              userRegistration.localProfilePhotoPath, userId);
+
+      // await _storageSource.uploadPhotos(userRegistration.localPhotosPath, userId);
+      List<Response<dynamic>> photosResponse = await _storageSource
+          .uploadPhotos(userRegistration.localPhotosPath, userId);
+
+      if (profilePhotoResponse is Success<String>) {
+        String profilePhotoUrl = profilePhotoResponse.value;
         AppUser user = AppUser(
-            id: id,
-            name: userRegistration.name,
-            age: userRegistration.age,
-            profilePhotoPath: profilePhotoUrl);
+          id: userId,
+          name: userRegistration.name,
+          age: userRegistration.age,
+          profilePhotoPath: profilePhotoUrl,
+          photosPath: photosResponse
+              .where((response) => response is Success<String>)
+              .map((response) => (response as Success<String>).value)
+              .toList(),
+        );
         _databaseSource.addUser(user);
-        SharedPreferencesUtil.setUserId(id);
+        SharedPreferencesUtil.setUserId(userId);
         _user = _user;
         return Response.success(user);
       }
     }
-    if (response is Error) showSnackBar(errorScaffoldKey, response.message);
-    return response;
+    if (authResponse is Error) {
+      showSnackBar(errorScaffoldKey, authResponse.message);
+    }
+    return authResponse;
   }
 
   Future<AppUser> _getUser() async {
