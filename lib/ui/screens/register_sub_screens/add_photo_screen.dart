@@ -6,8 +6,12 @@ import 'package:tinder_app_flutter/util/constants.dart';
 
 class AddPhotoScreen extends StatefulWidget {
   final Function(List<String>) onPhotosChanged;
+  final List<String> initialImagePaths;
 
-  AddPhotoScreen({@required this.onPhotosChanged});
+  AddPhotoScreen({
+    @required this.onPhotosChanged,
+    @required this.initialImagePaths,
+  });
 
   @override
   _AddPhotoScreenState createState() => _AddPhotoScreenState();
@@ -17,18 +21,26 @@ class _AddPhotoScreenState extends State<AddPhotoScreen> {
   final picker = ImagePicker();
   List<String> _imagePaths = [];
 
+  @override
+  void initState() {
+    super.initState();
+    _imagePaths.addAll(widget.initialImagePaths);
+  }
+
   Future pickImageFromGallery() async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
 
     if (pickedFile != null && _imagePaths.length < 9) {
       _imagePaths.add(pickedFile.path);
       widget.onPhotosChanged(_imagePaths);
+      setState(() {});
     }
   }
 
   void clearImage(int index) {
     _imagePaths.removeAt(index);
     widget.onPhotosChanged(_imagePaths);
+    setState(() {});
   }
 
   @override

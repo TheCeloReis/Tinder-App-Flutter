@@ -3,8 +3,9 @@ import 'package:tinder_app_flutter/ui/widgets/bordered_text_field.dart';
 
 class NameScreen extends StatelessWidget {
   final Function(String) onChanged;
+  final String initialValue;
 
-  NameScreen({@required this.onChanged});
+  NameScreen({@required this.onChanged, @required this.initialValue});
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +27,7 @@ class NameScreen extends StatelessWidget {
           child: BorderedTextField(
             labelText: 'Nome',
             onChanged: onChanged,
+            textController: TextEditingController(text: initialValue),
             textCapitalization: TextCapitalization.words,
           ),
         ),

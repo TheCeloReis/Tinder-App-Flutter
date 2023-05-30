@@ -70,19 +70,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
     switch (_currentScreenIndex) {
       case 0:
         return NameScreen(
-            onChanged: (value) => {_userRegistration.name = value});
+            onChanged: (value) => {_userRegistration.name = value},
+            initialValue: _userRegistration.name);
       case 1:
-        return AgeScreen(onChanged: (value) => {_userRegistration.age = value});
+        return AgeScreen(
+          onChanged: (value) => {_userRegistration.age = value},
+          initialValue: _userRegistration.age,
+        );
       case 2:
         return AddPhotoScreen(
-            onPhotosChanged: (value) => {
-                  _userRegistration.localProfilePhotoPath = value[0],
-                  _userRegistration.localPhotosPath = value.sublist(1)
-                });
+          onPhotosChanged: (value) => {
+            _userRegistration.localProfilePhotoPath = value[0],
+            _userRegistration.localPhotosPath = value.sublist(1)
+          },
+          initialImagePaths: [
+            _userRegistration.localProfilePhotoPath,
+            ..._userRegistration.localPhotosPath
+          ],
+        );
       case 3:
         return EmailAndPasswordScreen(
             emailOnChanged: (value) => {_userRegistration.email = value},
-            passwordOnChanged: (value) => {_userRegistration.password = value});
+            passwordOnChanged: (value) => {_userRegistration.password = value},
+            initialValues: {
+              'email': _userRegistration.email,
+              'password': _userRegistration.password
+            });
       default:
         return Container();
     }
