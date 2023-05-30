@@ -39,3 +39,7 @@ app.*.symbols
 
 # Obfuscation related
 app.*.map.json
+
+# Admin
+/admin/env/*
+/admin/node_modules/*
