@@ -99,7 +99,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                 !snapshot.hasData) {
                               return Center(
                                 child: Container(
-                                    child: Text('No users',
+                                    child: Text('Sem pessoas para mostrar',
                                         style: Theme.of(context)
                                             .textTheme
                                             .headline4)),
