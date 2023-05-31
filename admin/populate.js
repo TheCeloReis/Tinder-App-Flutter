@@ -17,6 +17,7 @@ async function createUser({
   password,
   photos,
   profilePhoto,
+  priority,
 }) {
   const authResponse = await admin.auth().createUser({
     email,
@@ -34,6 +35,7 @@ async function createUser({
     profile_photo_path: profilePhoto,
     typing_to: "",
     typing_at: 0,
+    priority,
   });
 
   console.log(`Created user ${authResponse.displayName} ${authResponse.uid}`);

@@ -34,9 +34,22 @@ class _MatchScreenState extends State<MatchScreen> {
       }
       _ignoreSwipeIds.add(myUserId);
     }
-    var res = await _databaseSource.getPersonsToMatchWith(1, _ignoreSwipeIds);
-    if (res.docs.length > 0) {
-      var userToMatchWith = AppUser.fromSnapshot(res.docs.first);
+    var res = await _databaseSource.getPersonsToMatchWith(20, _ignoreSwipeIds);
+
+    QueryDocumentSnapshot<Object> highestPriority;
+
+    res.docs.forEach((element) {
+      if (highestPriority == null) {
+        highestPriority = element;
+      } else {
+        if (element['priority'] > highestPriority['priority']) {
+          highestPriority = element;
+        }
+      }
+    });
+
+    if (highestPriority != null) {
+      var userToMatchWith = AppUser.fromSnapshot(highestPriority);
       return userToMatchWith;
     } else {
       return null;

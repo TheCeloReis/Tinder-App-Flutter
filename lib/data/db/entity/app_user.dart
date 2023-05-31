@@ -11,13 +11,15 @@ class AppUser {
 
   String typingTo;
   int typingAt;
+  int priority;
 
   AppUser(
       {@required this.id,
       @required this.name,
       @required this.age,
       @required this.profilePhotoPath,
-      @required this.photosPath});
+      @required this.photosPath,
+      this.priority = 1});
 
   AppUser.fromSnapshot(DocumentSnapshot snapshot) {
     id = snapshot['id'];
@@ -28,6 +30,7 @@ class AppUser {
     bio = snapshot.get('bio') ?? '';
     typingTo = snapshot.get('typing_to') ?? '';
     typingAt = snapshot.get('typing_at') ?? 0;
+    priority = snapshot.get('priority') ?? 1;
   }
 
   Map<String, dynamic> toMap() {
@@ -40,6 +43,7 @@ class AppUser {
       'bio': bio,
       'typing_to': typingTo,
       'typing_at': typingAt,
+      'priority': priority,
     };
   }
 }
