@@ -32,6 +32,8 @@ async function createUser({
     bio: "",
     photos_path: photos,
     profile_photo_path: profilePhoto,
+    typing_to: "",
+    typing_at: 0,
   });
 
   console.log(`Created user ${authResponse.displayName} ${authResponse.uid}`);
