@@ -11,6 +11,7 @@ import 'package:tinder_app_flutter/util/shared_preferences_utils.dart';
 import 'package:tinder_app_flutter/data/db/entity/app_user.dart';
 import 'package:tinder_app_flutter/util/utils.dart';
 import 'package:tinder_app_flutter/data/db/entity/match.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserProvider extends ChangeNotifier {
   FirebaseAuthSource _authSource = FirebaseAuthSource();
@@ -76,8 +77,18 @@ class UserProvider extends ChangeNotifier {
   Future<AppUser> _getUser() async {
     if (_user != null) return _user;
     String id = await SharedPreferencesUtil.getUserId();
-    _user = AppUser.fromSnapshot(await _databaseSource.getUser(id));
-    return _user;
+    if (id == null || id.isEmpty) {
+      await logoutUser();
+      return null;
+    }
+    DocumentSnapshot userSnapshot = await _databaseSource.getUser(id);
+    if (userSnapshot.exists) {
+      _user = AppUser.fromSnapshot(userSnapshot);
+      return _user;
+    } else {
+      await logoutUser();
+      return null;
+    }
   }
 
   void updateUserProfilePhoto(
