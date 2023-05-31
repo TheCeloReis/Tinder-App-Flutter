@@ -9,6 +9,9 @@ class AppUser {
   List<String> photosPath = [];
   String bio = "";
 
+  String typingTo;
+  int typingAt;
+
   AppUser(
       {@required this.id,
       @required this.name,
@@ -23,6 +26,8 @@ class AppUser {
     profilePhotoPath = snapshot['profile_photo_path'];
     photosPath = snapshot['photos_path'].cast<String>();
     bio = snapshot.get('bio') ?? '';
+    typingTo = snapshot.get('typing_to') ?? '';
+    typingAt = snapshot.get('typing_at') ?? 0;
   }
 
   Map<String, dynamic> toMap() {
@@ -32,7 +37,9 @@ class AppUser {
       'age': age,
       'profile_photo_path': profilePhotoPath,
       'photos_path': photosPath,
-      'bio': bio
+      'bio': bio,
+      'typing_to': typingTo,
+      'typing_at': typingAt,
     };
   }
 }

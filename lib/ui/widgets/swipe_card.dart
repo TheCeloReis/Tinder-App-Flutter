@@ -54,7 +54,7 @@ class _SwipeCardState extends State<SwipeCard> {
                     color: Colors.grey.shade800, // Grey background color
                     child: Image.network(
                       widget.person.profilePhotoPath,
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                       loadingBuilder: (context, child, loadingProgress) {
                         if (loadingProgress == null) {
                           return child;
@@ -73,7 +73,7 @@ class _SwipeCardState extends State<SwipeCard> {
                     color: Colors.grey.shade800, // Grey background color
                     child: Image.network(
                       widget.person.photosPath[index - 1],
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                       loadingBuilder: (context, child, loadingProgress) {
                         if (loadingProgress == null) {
                           return child;

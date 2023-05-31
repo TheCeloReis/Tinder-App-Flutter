@@ -46,6 +46,13 @@ class FirebaseDatabaseSource {
     instance.collection('users').doc(user.id).update(user.toMap());
   }
 
+  void updateUserTyping(String userId, String recipientId) {
+    instance.collection('users').doc(userId).update({
+      'typing_to': recipientId,
+      'typing_at': DateTime.now().millisecondsSinceEpoch
+    });
+  }
+
   void updateChat(Chat chat) {
     instance.collection('chats').doc(chat.id).update(chat.toMap());
   }
