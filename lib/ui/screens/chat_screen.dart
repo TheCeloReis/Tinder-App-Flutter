@@ -32,6 +32,7 @@ class _ChatScreenState extends State<ChatScreen> {
   final messageTextController = TextEditingController();
   StreamSubscription<DocumentSnapshot> typingSubscription;
   bool isTyping = false;
+  Timer typingTimer;
 
   @override
   void initState() {
@@ -40,9 +41,8 @@ class _ChatScreenState extends State<ChatScreen> {
         _databaseSource.observeUser(widget.otherUserId).listen((snapshot) {
       if (snapshot != null && snapshot.exists) {
         setState(() {
-          isTyping = snapshot['typing_to'] == widget.myUserId &&
-              snapshot['typing_at'] >
-                  DateTime.now().millisecondsSinceEpoch - 5000;
+          isTyping = snapshot['typing_to'] == widget.myUserId;
+          _startTypingTimer();
         });
       }
     });
@@ -51,7 +51,17 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void dispose() {
     typingSubscription?.cancel();
+    typingTimer?.cancel();
     super.dispose();
+  }
+
+  void _startTypingTimer() {
+    typingTimer?.cancel();
+    typingTimer = Timer(Duration(seconds: 5), () {
+      setState(() {
+        isTyping = false;
+      });
+    });
   }
 
   void checkAndUpdateLastMessageSeen(
@@ -89,6 +99,7 @@ class _ChatScreenState extends State<ChatScreen> {
     Chat updatedChat = Chat(widget.chatId, message);
     _databaseSource.addMessage(widget.chatId, message);
     _databaseSource.updateChat(updatedChat);
+    _databaseSource.updateUserTyping(widget.myUserId, null);
     messageTextController.clear();
   }
 
