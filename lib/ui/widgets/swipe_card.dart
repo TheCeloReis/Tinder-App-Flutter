@@ -146,7 +146,7 @@ class _SwipeCardState extends State<SwipeCard> {
           },
           iconData: showInfo ? Icons.arrow_downward : Icons.person,
           iconSize: 16,
-          buttonColor: kColorPrimaryVariant,
+          buttonColor: Color(0xFFff5890),
         ),
       ],
     );
@@ -180,7 +180,9 @@ class _SwipeCardState extends State<SwipeCard> {
                     widget.person.bio.length > 0
                         ? widget.person.bio
                         : "Sem descrição",
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                          color: Colors.white,
+                        ),
                   ),
                 ),
               ),

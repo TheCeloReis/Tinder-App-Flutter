@@ -5,13 +5,13 @@ const kDefaultPadding = EdgeInsets.symmetric(
   horizontal: 26.0,
 );
 
-const kPrimaryColor = Color(0xFF1D1C1C);
-const kSecondaryColor = Colors.white;
-const kAccentColor = Color(0xFFF4C470);
+const kPrimaryColor = Colors.white;
+const kSecondaryColor = Colors.black;
+const kAccentColor = Color(0xFFE8234E);
 
-const kColorPrimaryVariant = Color(0xFF424242);
+const kColorPrimaryVariant = Color(0xFFEEEEEE);
 
-const kBackgroundColor = Color(0xFF1D1C1C);
+const kBackgroundColor = Colors.white;
 const kBackgroundColorInt = 0xFF1D1C1C;
 const kFontFamily = 'Nunito';
 
@@ -24,7 +24,7 @@ const kTextTheme = TextTheme(
 const kButtonTheme = ButtonThemeData(
   splashColor: Colors.transparent,
   padding: EdgeInsets.symmetric(vertical: 14),
-  buttonColor: Color(0xFFF4C470),
+  buttonColor: Color(0xFFE8234E),
   textTheme: ButtonTextTheme.accent,
   highlightColor: Color.fromRGBO(0, 0, 0, .3),
   focusColor: Color.fromRGBO(0, 0, 0, .3),

@@ -17,7 +17,12 @@ class RoundedButton extends StatelessWidget {
         highlightElevation: 0,
         elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-        child: Text(text, style: Theme.of(context).textTheme.button),
+        child: Text(
+          text,
+          style: Theme.of(context).textTheme.button.copyWith(
+                color: Colors.white,
+              ),
+        ),
         onPressed: onPressed,
       ),
     );

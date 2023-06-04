@@ -41,7 +41,9 @@ class MessageBubble extends StatelessWidget {
             child: Material(
               borderRadius: BorderRadius.circular(8.0),
               elevation: 5.0,
-              color: isSenderMyUser ? kAccentColor : kSecondaryColor,
+              color: isSenderMyUser
+                  ? Color.fromARGB(127, 61, 255, 80)
+                  : Color.fromARGB(127, 254, 163, 194),
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 child: Text(

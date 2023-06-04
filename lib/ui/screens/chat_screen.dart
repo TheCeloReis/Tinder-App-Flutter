@@ -107,6 +107,8 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: Colors.black),
         title: StreamBuilder<DocumentSnapshot>(
           stream: _databaseSource.observeUser(widget.otherUserId),
           builder: (context, snapshot) {
@@ -213,7 +215,9 @@ class _ChatScreenState extends State<ChatScreen> {
                   borderRadius: BorderRadius.circular(4)),
               child: Text(
                 "ENVIAR",
-                style: Theme.of(context).textTheme.bodyText1,
+                style: Theme.of(context).textTheme.bodyText1.copyWith(
+                      color: Colors.white,
+                    ),
               ),
               onPressed: () {
                 sendMessage(widget.myUserId);

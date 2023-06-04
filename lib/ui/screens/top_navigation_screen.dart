@@ -31,7 +31,11 @@ class TopNavigationScreen extends StatelessWidget {
           .toList(),
     );
 
-    var appBar = AppBar(flexibleSpace: tabBar);
+    var appBar = AppBar(
+      flexibleSpace: tabBar,
+      backgroundColor: Color(0xffe8234e),
+      foregroundColor: Colors.black,
+    );
 
     return DefaultTabController(
       length: navigationItems.length,
@@ -47,10 +51,10 @@ class TopNavigationScreen extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               child: Container(
                 child: TabBarView(
-                    physics: NeverScrollableScrollPhysics(),
-                    children: navigationItems
-                        .map((navItem) => navItem.screen)
-                        .toList()),
+                  physics: NeverScrollableScrollPhysics(),
+                  children:
+                      navigationItems.map((navItem) => navItem.screen).toList(),
+                ),
               ),
             ),
           ),

@@ -44,7 +44,7 @@ class _AgeScreenState extends State<AgeScreen> {
               child: NumberPicker(
                   itemWidth: double.infinity,
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white, width: 2),
+                    border: Border.all(color: Color(0xffff5890), width: 2),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   value: age,

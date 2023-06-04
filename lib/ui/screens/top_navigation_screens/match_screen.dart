@@ -152,8 +152,6 @@ class _MatchScreenState extends State<MatchScreen> {
                                                         false);
                                                   },
                                                   iconData: Icons.clear,
-                                                  buttonColor:
-                                                      kColorPrimaryVariant,
                                                   iconSize: 30,
                                                 ),
                                                 RoundedIconButton(
@@ -164,6 +162,8 @@ class _MatchScreenState extends State<MatchScreen> {
                                                         true);
                                                   },
                                                   iconData: Icons.favorite,
+                                                  buttonColor:
+                                                      Color(0xFF22B541),
                                                   iconSize: 30,
                                                 ),
                                               ],

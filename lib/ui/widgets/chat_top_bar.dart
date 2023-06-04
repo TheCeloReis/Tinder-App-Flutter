@@ -49,7 +49,9 @@ class _ChatTopBarState extends State<ChatTopBar>
               children: [
                 Text(
                   widget.user.name,
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyText1.copyWith(
+                        color: Colors.black,
+                      ),
                 ),
                 if (widget.isTyping)
                   AnimatedBuilder(
@@ -60,7 +62,7 @@ class _ChatTopBarState extends State<ChatTopBar>
                         'Digitando${'.' * dotsCount}',
                         style: TextStyle(
                           fontSize: 12,
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                       );
                     },

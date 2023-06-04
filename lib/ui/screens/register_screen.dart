@@ -135,7 +135,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         key: _scaffoldKey,
-        appBar: AppBar(title: Text('Cadastrar')),
+        appBar: AppBar(
+          title: Text('Cadastrar'),
+          backgroundColor: Color(0xffe8234e),
+        ),
         body: CustomModalProgressHUD(
           inAsyncCall: _isLoading,
           child: Container(
