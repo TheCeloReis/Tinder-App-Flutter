@@ -118,24 +118,55 @@ class _SwipeCardState extends State<SwipeCard> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            RichText(
-              text: TextSpan(
-                style: DefaultTextStyle.of(context).style,
-                children: <TextSpan>[
-                  TextSpan(
-                    text: widget.person.name,
-                    style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+            Stack(
+              children: <Widget>[
+                // Stroked text as border.
+                Text(
+                  widget.person.name,
+                  style: TextStyle(
+                    fontSize: 36,
+                    foreground: Paint()
+                      ..style = PaintingStyle.stroke
+                      ..strokeWidth = 3
+                      ..color = Colors.grey.shade800,
                   ),
-                  TextSpan(
-                    text: '  ${widget.person.age}',
-                    style: TextStyle(fontSize: 20),
+                ),
+                // Solid text as fill.
+                Text(
+                  widget.person.name,
+                  style: TextStyle(
+                    fontSize: 36,
+                    color: Color(0xffffffff),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
+            Stack(
+              children: <Widget>[
+                // Stroked text as border.
+                Text(
+                  " " + widget.person.age.toString(),
+                  style: TextStyle(
+                    fontSize: 20,
+                    foreground: Paint()
+                      ..style = PaintingStyle.stroke
+                      ..strokeWidth = 2
+                      ..color = Colors.grey.shade800,
+                  ),
+                ),
+                // Solid text as fill.
+                Text(
+                  " " + widget.person.age.toString(),
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Color(0xffffffff),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
         RoundedIconButton(
