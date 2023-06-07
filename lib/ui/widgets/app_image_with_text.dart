@@ -15,7 +15,7 @@ class AppIconTitle extends StatelessWidget {
           ),
           SizedBox(width: 5.0),
           Text(
-            'finder',
+            'lovin\'',
             style: Theme.of(context).textTheme.headline2,
           )
         ],

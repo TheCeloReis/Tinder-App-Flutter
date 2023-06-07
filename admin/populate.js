@@ -85,6 +85,8 @@ async function deleteUser(uid) {
 async function deleteAllUsers() {
   const users = await admin.auth().listUsers();
 
+  users.users.forEach((u) => console.log(u.email));
+
   for (const user of users.users) {
     if (user.email === "admin@celoreis.dev") continue;
 
