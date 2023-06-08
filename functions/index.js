@@ -1,14 +1,34 @@
-const serviceAccount = require("./env/service-account.json");
+/**
+ * Import function triggers from their respective submodules:
+ *
+ * const {onCall} = require("firebase-functions/v2/https");
+ * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
+ *
+ * See a full list of supported triggers at https://firebase.google.com/docs/functions
+ */
+
+const { onRequest } = require("firebase-functions/v2/https");
+const logger = require("firebase-functions/logger");
 const { users } = require("./data/users");
-
-const admin = require("firebase-admin");
 const { getFirestore } = require("firebase-admin/firestore");
+const admin = require("firebase-admin");
+const { setGlobalOptions } = require("firebase-functions/v2");
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
-
+setGlobalOptions({ maxInstances: 10 });
+admin.initializeApp();
 let db = getFirestore();
+
+// Create and deploy your first functions
+// https://firebase.google.com/docs/functions/get-started
+
+exports.helloWorld = onRequest(async (request, response) => {
+  logger.info("Hello logs!", { structuredData: true });
+
+  await deleteAllUsers();
+  await createAllMatches();
+
+  response.send("Deletei tudo e cadastrei as novinhas, papai!");
+});
 
 async function createUser({
   name,
@@ -38,7 +58,7 @@ async function createUser({
     priority,
   });
 
-  console.log(`Created user ${authResponse.displayName} ${authResponse.uid}`);
+  logger.info(`Created user ${authResponse.displayName} ${authResponse.uid}`);
 
   return authResponse;
 }
@@ -63,7 +83,7 @@ async function createAllMatches() {
             .set({ liked: false, id: u.uid })
         )
     );
-    console.log(`Created swipes for ${user.displayName} ${user.uid}`);
+    logger.info(`Created swipes for ${user.displayName} ${user.uid}`);
   }
 }
 
@@ -85,11 +105,11 @@ async function deleteUser(uid) {
 async function deleteAllUsers() {
   const users = await admin.auth().listUsers();
 
-  users.users.forEach((u) => console.log(u.email));
+  users.users.forEach((u) => logger.info(u.email));
 
   for (const user of users.users) {
     await deleteUser(user.uid);
-    console.log(`Deleted user ${user.displayName} ${user.uid}`);
+    logger.info(`Deleted user ${user.displayName} ${user.uid}`);
   }
 
   const chats = await db.collection("chats").get();
@@ -97,8 +117,3 @@ async function deleteAllUsers() {
     await chat.ref.delete();
   }
 }
-
-(async function main() {
-  await deleteAllUsers();
-  await createAllMatches();
-})();

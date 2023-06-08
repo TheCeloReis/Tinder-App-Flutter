@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Call with Loading Bar</title>
+    <style>
+        #loadingBar {
+            width: 0;
+            height: 20px;
+            background-color: #4CAF50;
+        }
+        #myButton {
+            padding: 10px 20px;
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #myButton:disabled {
+            background-color: #999999;
+        }
+    </style>
+</head>
+<body>
+    <button id="myButton" onclick="myFunction()">Call API</button>
+    <div id="loadingBar"></div>
+
+    <script>
+        function myFunction() {
+            document.getElementById("myButton").disabled = true;
+            var width = 0;
+            var elem = document.getElementById("loadingBar"); 
+            var id = setInterval(frame, 10);
+            function frame() {
+                if (width >= 100) {
+                    clearInterval(id);
+                    document.getElementById("myButton").disabled = false;
+                } else {
+                    width++; 
+                    elem.style.width = width + '%'; 
+                }
+            }
+
+            fetch('https://api.yourservice.com')  // replace with your API
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                document.getElementById("myButton").disabled = false;
+                elem.style.width = '0%'; 
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert("API call failed!");
+                document.getElementById("myButton").disabled = false;
+                elem.style.width = '0%'; 
+            });
+        }
+    </script>
+</body>
+</html>
