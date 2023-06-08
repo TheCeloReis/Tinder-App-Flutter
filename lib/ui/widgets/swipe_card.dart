@@ -144,29 +144,6 @@ class _SwipeCardState extends State<SwipeCard> {
                 ),
               ],
             ),
-            Stack(
-              children: <Widget>[
-                // Stroked text as border.
-                Text(
-                  " " + widget.person.age.toString(),
-                  style: TextStyle(
-                    fontSize: 20,
-                    foreground: Paint()
-                      ..style = PaintingStyle.stroke
-                      ..strokeWidth = 2
-                      ..color = Colors.grey.shade800,
-                  ),
-                ),
-                // Solid text as fill.
-                Text(
-                  " " + widget.person.age.toString(),
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Color(0xffffffff),
-                  ),
-                ),
-              ],
-            )
           ],
         ),
         RoundedIconButton(
